@@ -1,0 +1,40 @@
+# Node / Angular
+node_modules/
+dist/
+.angular/
+.tmp/
+package-lock.json
+npm-debug.log
+
+# Dotnet / C#
+bin/
+obj/
+*.user
+*.suo
+*.db
+*.bak
+*.pdb
+
+# VSCode / IDE
+.vscode/
+.idea/
+
+# Docker
+*.tar
+*.img
+*.log
+
+# OS/System
+.DS_Store
+Thumbs.db
+
+# Env and secrets
+.env
+.env.*
+appsettings.*.json
+
+# Logs
+*.log
+
+# Other
+startup/.git
