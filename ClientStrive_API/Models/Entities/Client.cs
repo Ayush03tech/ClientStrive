@@ -17,4 +17,5 @@ public class Client
     public string? gstNo { get; set; }
     public string? contactNo { get; set; }
     public string? regNo { get; set; }
+    
 }
