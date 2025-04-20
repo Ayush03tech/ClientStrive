@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+  sql:
+    image: mcr.microsoft.com/azure-sql-edge:latest
+    environment:
+      - ACCEPT_EULA=Y                        # Accept the SQL Edge license terms
+      - MSSQL_SA_PASSWORD=ayush@03 # SA user password
+    volumes:
+      - sqlserver_data:/var/opt/mssql            # Persist database files to named volume
+    ports:
+      - "1433:1433"                          # Host->container port mapping for SQL (optional, for external DB access)
+    networks:
+      - app-network
+  api:
+    build:
+      context: ./ClientStrive_API
+    ports:
+      - "5096:80"
+    depends_on:
+      - sql
+    networks:
+      - app-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      - ConnectionStrings__DefaultConnection=Server=sql;Database=ClientStrive;User Id=sa;Password=ayush@03;TrustServerCertificate=True;
+
+
+  frontend:
+    build:
+      context: ./startup
+    ports:
+      - "4200:80"
+    depends_on:
+      - api
+    networks:
+      - app-network
+  
+networks:
+  app-network:
+    driver: bridge
+
+volumes:  
+  sqlserver_data:
+    external: true

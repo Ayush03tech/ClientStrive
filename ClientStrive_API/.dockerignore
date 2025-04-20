@@ -1,0 +1,20 @@
+# Ignore build outputs
+bin/
+obj/
+
+# Ignore user-specific files
+.vscode/
+*.user
+*.suo
+
+# Ignore Docker-related leftovers
+Dockerfile.*
+docker-compose.*
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore secrets and config
+*.env
+appsettings.*.json
