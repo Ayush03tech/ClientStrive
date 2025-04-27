@@ -115,7 +115,13 @@
                     </div>
                     <div class="row pt-2">
                         <div class="col-6 text-center">
-                            <button class="btn btn-success" [disabled]="projectForm.invalid" (click)="onSaveProject()">{{clientProjectObj.clientProjectId != 0 ? 'Update Project': 'Save Project'}}</button>
+                            <button
+                              class="btn btn-success"
+                              [disabled]="projectForm.invalid || !isFormEdited"
+                              (click)="onSaveProject()"
+                            >
+                              {{ clientProjectObj.clientProjectId != 0 ? 'Update Project' : 'Save Project' }}
+                            </button>
                         </div>
                         <div class="col-6 text-center">
                             <button class="btn btn-secondary" (click)="onReset()">Reset</button>

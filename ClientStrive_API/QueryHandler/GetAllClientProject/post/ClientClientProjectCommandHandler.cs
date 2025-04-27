@@ -19,11 +19,12 @@ public class ClientClientProjectCommandHandler : IRequestHandler<ClientProjectCo
     {
         var dtos = request.ClientProjectDto;
         var clientProject = await _context.ClientProjects.FindAsync(dtos?.ClientProjectId, cancellationToken);
-        if(clientProject !=null){
+        if (clientProject != null)
+        {
             clientProject.ProjectName = dtos?.ProjectName;
             clientProject.StartDate = dtos?.StartDate ?? DateTime.MinValue;
             clientProject.ExpectedEndDate = dtos?.ExpectedEndDate ?? DateTime.MinValue;
-            clientProject.ContactPerson  = dtos?.ContactPerson;
+            clientProject.ContactPerson = dtos?.ContactPerson;
             clientProject.ContactPersonContactNo = dtos?.ContactPersonContactNo;
             clientProject.ContactPersonEmailId = dtos?.ContactPersonEmailId;
             clientProject.TotalEmpWorking = dtos?.TotalEmpWorking ?? 0;
@@ -32,7 +33,8 @@ public class ClientClientProjectCommandHandler : IRequestHandler<ClientProjectCo
             clientProject.ClientId = dtos?.ClientId ?? 0;
             clientProject.LeadByEmpId = dtos?.LeadByEmpId ?? 0;
         }
-        else{
+        else
+        {
             clientProject = new ClientProject
             {
                 ProjectName = dtos?.ProjectName,

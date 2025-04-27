@@ -37,11 +37,17 @@ export class ClientProjectComponent implements OnInit {
   clientList: client[] = [];
   clientProjectList: clientProject[] = [];
   clientProjectObj = new clientProject;
+  isFormEdited: boolean = false; // Flag to track form changes
 
   ngOnInit(): void {
     this.getAllEmployee();
     this.getAllClient();
     this.getAllClientProject();
+
+    // Subscribe to form changes
+    this.projectForm.valueChanges.subscribe(() => {
+      this.isFormEdited = true; // Set flag to true when form is edited
+    });
   }
 
   getAllEmployee(){
@@ -83,6 +89,7 @@ export class ClientProjectComponent implements OnInit {
       res.data.startDate = this.datePipe.transform(res.data.startDate, 'yyyy-MM-dd');
       res.data.expectedEndDate = this.datePipe.transform(res.data.expectedEndDate, 'yyyy-MM-dd');
       this.projectForm.patchValue(res.data);
+      this.isFormEdited = false; // Reset the flag when form is populated
     });
   }
 
@@ -94,6 +101,7 @@ export class ClientProjectComponent implements OnInit {
         alert(res.message); 
         this.getAllClientProject();
         this.projectForm.reset();
+        this.isFormEdited = false; // Reset the flag after saving
       }else{
         alert(res.message);
       }
@@ -103,6 +111,7 @@ export class ClientProjectComponent implements OnInit {
   onReset(){
     this.projectForm.reset();
     this.clientProjectObj = new clientProject();
+    this.isFormEdited = false; // Reset the flag on reset
   }
 
 }
